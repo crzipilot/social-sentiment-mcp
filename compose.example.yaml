@@ -1,0 +1,19 @@
+services:
+  social-mcp:
+    build: .
+    image: social-sentiment-mcp:latest
+    container_name: social-mcp
+    restart: unless-stopped
+    environment:
+      MCP_PATH: /mcp-CHANGE-TO-A-LONG-RANDOM-STRING
+      DB_PATH: /data/history.db
+      TZ: America/New_York
+    volumes:
+      - ./data:/data
+    networks:
+      - mcpnet
+
+networks:
+  mcpnet:
+    external: true
+    name: tastytrade-mcp_mcpnet
